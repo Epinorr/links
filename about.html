@@ -1,65 +1,47 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#08070d">
-  <meta name="color-scheme" content="dark">
-  <meta name="description" content="داستان محمد، مسیر EPINOR و چیزهایی که برایش مهم است.">
-  <title>EPINOR | من کیم؟</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#08090b">
+  <title>EPINOR — درباره من</title>
   <style>
     @font-face{font-family:YekanBakh;src:url('yekan.woff') format('woff');font-display:swap}
-    :root{--bg:#08070d;--panel:rgba(255,255,255,.055);--line:rgba(255,255,255,.1);--text:#f6f4fa;--muted:#a8a3b5;--acc:#6de7ef;--pink:#fb7185;--violet:#a78bfa;--mx:50%;--my:25%}
-    *{box-sizing:border-box;margin:0;padding:0}html{background:var(--bg);scroll-behavior:smooth}body{font-family:YekanBakh,Tahoma,sans-serif;color:var(--text);background:radial-gradient(50rem 30rem at var(--mx) var(--my),rgba(109,231,239,.10),transparent 50%),radial-gradient(44rem 30rem at 90% 80%,rgba(167,139,250,.09),transparent 50%),var(--bg);overflow-x:hidden;-webkit-font-smoothing:antialiased}a{text-decoration:none;color:inherit}
-    .shell{width:min(1000px,calc(100% - 30px));margin:0 auto;padding:18px 0 80px}.top{position:sticky;top:12px;z-index:10;display:flex;justify-content:space-between;align-items:center;margin-bottom:52px}.pill{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid var(--line);border-radius:999px;background:rgba(10,9,15,.62);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);color:#e6e2ed;transition:.3s}.pill:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.18)}.pill svg{width:16px;height:16px}
-    .progress{position:fixed;top:0;right:0;height:3px;width:100%;transform-origin:100% 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--violet),var(--acc));z-index:20;transition:transform .08s linear}
-    .intro{display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:end;margin-bottom:80px}.intro-copy{padding:18px 0}.eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-size:.85rem}.eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--acc);box-shadow:0 0 14px var(--acc)}.title{font-family:Outfit,Arial,sans-serif;direction:ltr;text-align:right;font-size:clamp(4.4rem,12vw,8.6rem);line-height:.88;letter-spacing:-.06em;font-weight:800;background:linear-gradient(115deg,#fff 18%,var(--acc) 58%,var(--violet) 88%);-webkit-background-clip:text;color:transparent;background-clip:text;margin:20px 0 22px}.intro-lead{font-size:1.25rem;line-height:2;color:#dad5e2;max-width:680px}.intro-card{border:1px solid var(--line);background:var(--panel);border-radius:28px;padding:16px;box-shadow:0 24px 70px rgba(0,0,0,.34);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}.intro-card img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 20%;border-radius:20px}.intro-tag{padding:14px 4px 2px;display:flex;justify-content:space-between;align-items:center;font-size:.85rem;color:#ccc7d6}.intro-tag span:last-child{color:var(--muted);font-family:Outfit,Arial,sans-serif;direction:ltr}
-
-    .chapter{display:grid;grid-template-columns:170px 1fr;gap:26px;padding:72px 0;border-top:1px solid rgba(255,255,255,.08);position:relative}.chapter-num{font:700 .82rem/1.3 Outfit,Arial,sans-serif;direction:ltr;color:var(--muted);padding-top:8px;letter-spacing:.12em}.chapter-body{max-width:700px}.chapter-title{font-size:clamp(2rem,4vw,3.2rem);line-height:1.35;margin-bottom:22px}.chapter-body p{font-size:1.08rem;line-height:2.2;color:#c9c4d2}.chapter-body p+p{margin-top:14px}.metric{font-size:clamp(4.5rem,12vw,8rem);font-weight:800;line-height:.85;color:var(--acc);letter-spacing:-.04em;margin-bottom:8px}.metric-note{color:var(--muted);font-size:.9rem}
-    .things{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}.thing{border:1px solid var(--line);background:rgba(255,255,255,.035);border-radius:20px;padding:20px;min-height:160px;transition:.35s}.thing:hover{transform:translateY(-4px);background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.16)}.thing-index{font:700 .75rem/1 Outfit,Arial,sans-serif;color:var(--muted);direction:ltr}.thing h3{font-size:1.05rem;margin:26px 0 6px}.thing p{font-size:.9rem!important;line-height:1.9!important;color:var(--muted)!important}
-    .quote{margin-top:16px;border:1px solid rgba(109,231,239,.18);background:linear-gradient(135deg,rgba(109,231,239,.07),rgba(255,255,255,.025));border-radius:28px;padding:28px 30px;font-size:clamp(1.35rem,3.2vw,2.1rem);line-height:1.95;font-weight:700;color:#f4f1f7}
-    .end{padding:80px 0 20px;display:flex;justify-content:space-between;align-items:end;gap:20px}.end h2{font-size:clamp(2rem,5vw,4rem);line-height:1.25}.end p{color:var(--muted);margin-top:12px}.back{border:1px solid var(--line);padding:13px 16px;border-radius:14px;background:rgba(255,255,255,.04);transition:.3s}.back:hover{transform:translateY(-2px);background:rgba(255,255,255,.07)}
-    .reveal{opacity:0;transform:translateY(22px);transition:.8s cubic-bezier(.2,.8,.2,1)}.reveal.on{opacity:1;transform:none}
-    @media(max-width:760px){.intro{grid-template-columns:1fr;margin-bottom:38px}.intro-card{max-width:320px}.chapter{grid-template-columns:1fr;padding:54px 0;gap:10px}.things{grid-template-columns:1fr}.thing{min-height:auto}.end{align-items:flex-start;flex-direction:column}.title{font-size:clamp(4rem,22vw,6rem)}}
-    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}.thing,.pill,.back{transition:none}}
+    :root{--bg:#08090b;--text:#f6f7f5;--muted:#9b9fa6;--line:rgba(255,255,255,.08);--accent:#bdfc55}
+    *{box-sizing:border-box;margin:0}html{background:var(--bg);scroll-behavior:smooth}body{background:var(--bg);color:var(--text);font-family:YekanBakh,system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block;pointer-events:none}.veil{position:fixed;inset:0;z-index:1;background:linear-gradient(180deg,rgba(8,9,11,.55),rgba(8,9,11,.9) 82%,#08090b);pointer-events:none}.grain{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.026;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+    .wrap{position:relative;z-index:3;width:min(100% - 32px,760px);margin:0 auto;padding:22px 0 60px}.top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:.84rem}.brand{direction:ltr;color:#fff;font-weight:700}.back{display:inline-flex;gap:8px;align-items:center;color:var(--muted);text-decoration:none;padding:8px 0;transition:.25s}.back:hover{color:#fff}.back svg{width:16px;height:16px}
+    .hero{padding:94px 0 56px;max-width:660px}.eyebrow{color:var(--accent);font-size:.86rem;margin-bottom:14px}.hero h1{font-size:clamp(2.8rem,9vw,5.8rem);line-height:1.02;letter-spacing:-.045em}.hero h1 span{color:#73777d}.hero p{max-width:560px;margin-top:20px;color:#c0c4c8;font-size:1.08rem;line-height:2}
+    .stack{display:grid;gap:12px}.card{padding:22px 0;border-top:1px solid var(--line)}.card:last-child{border-bottom:1px solid var(--line)}.label{font-size:.78rem;color:#6f747a;letter-spacing:.02em;margin-bottom:8px}.card h2{font-size:1.45rem;line-height:1.45}.card p{margin-top:10px;color:#b9bdc2;line-height:2;font-size:1rem}.quote{font-size:clamp(1.35rem,4vw,2.1rem)!important;color:#eef0ef!important;line-height:1.8!important}
+    .socials{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:18px}.social{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 14px;color:#fff;text-decoration:none;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.022);transition:.25s}.social:hover{transform:translateY(-2px);border-color:rgba(189,252,85,.28);background:rgba(189,252,85,.035)}.social small{color:var(--muted);direction:ltr}
+    .footer{margin-top:42px;color:#666b70;font-size:.75rem;direction:ltr;text-align:center}
+    @media(max-width:600px){.wrap{width:min(100% - 24px,760px)}.hero{padding-top:72px}.socials{grid-template-columns:1fr}.card{padding:18px 0}}
+    @media (prefers-reduced-motion:no-preference){.hero,.card{opacity:0;transform:translateY(14px);animation:up .7s cubic-bezier(.2,.8,.2,1) forwards}.card:nth-child(2){animation-delay:.08s}.card:nth-child(3){animation-delay:.16s}.card:nth-child(4){animation-delay:.24s}@keyframes up{to{opacity:1;transform:none}}}
   </style>
 </head>
 <body>
-  <div class="progress" id="progress"></div>
-  <div class="shell">
-    <nav class="top"><a class="pill" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6 9 12l6 6"/></svg>بازگشت به لینک‌ها</a><span class="pill">EPINOR / 2026</span></nav>
-
-    <header class="intro reveal">
-      <div class="intro-copy"><span class="eyebrow"><i></i>یک صفحه برای شناختن من، بدون مقدمه اضافه</span><h1 class="title">EPINOR</h1><p class="intro-lead">من محمدم؛ کسی که مدت‌ها بین «شروع کنم» و «هنوز آماده نیستم» گیر کرده بود. اینجا داستان همان مسیری‌ست که بالاخره تصمیم گرفتم شروعش کنم.</p></div>
-      <div class="intro-card"><img src="logo.jpg" alt="تصویر محمد - EPINOR"><div class="intro-tag"><span>محمد · EPINOR</span><span>CREATOR</span></div></div>
-    </header>
-
+  <canvas id="scene" aria-hidden="true"></canvas><div class="veil"></div><div class="grain"></div>
+  <div class="wrap">
+    <header class="top"><span class="brand">EPINOR</span><a class="back" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m15 6-6 6 6 6"/></svg>برگردیم</a></header>
     <main>
-      <section class="chapter reveal"><div class="chapter-num">01 / START</div><div class="chapter-body"><div class="metric">۵ سال</div><div class="metric-note">بین تصمیم گرفتن و واقعاً شروع کردن</div><h2 class="chapter-title">تا وقتی که از شروع‌نکردن خسته شدم.</h2><p>از خیلی وقت پیش دوست داشتم تولید محتوا را شروع کنم. آموزش دیدم، دوره دیدم و چیزهای زیادی یاد گرفتم؛ ولی یادگرفتن، جای شروع‌کردن را نگرفت.</p><p>کمال‌گرایی، استرس و ترس از قضاوت‌شدن مدام می‌گفتند «هنوز آماده نیستی». بعد از حدود پنج سال، تصمیم گرفتم منتظر نسخه بی‌نقص خودم نمانم و بالاخره شروع کنم؛ حتی اگر اولین قدم کامل نباشد.</p></div></section>
-
-      <section class="chapter reveal"><div class="chapter-num">02 / MAKE</div><div class="chapter-body"><h2 class="chapter-title">چی می‌سازم؟</h2><p>محتوایی که قرار نیست فقط یک موضوع ثابت داشته باشد؛ چیزی بین سرگرمی، تجربه شخصی، تکنولوژی و ایده‌هایی که از ذهن خودم می‌آیند.</p><div class="things"><article class="thing"><div class="thing-index">01</div><h3>ویدیو</h3><p>گاهی سینمایی، گاهی متفاوت، و همیشه با ایده‌ای که دوست دارم خودم ببینمش.</p></article><article class="thing"><div class="thing-index">02</div><h3>استریم</h3><p>گیم، حرف‌زدن، چیل‌کردن و لحظه‌هایی که قرار نیست زیادی رسمی باشند.</p></article><article class="thing"><div class="thing-index">03</div><h3>فان + آموزش</h3><p>چیزهایی که اول سرگرمت کنند و شاید در مسیرشان چیزی هم یادت بدهند.</p></article></div></div></section>
-
-      <section class="chapter reveal"><div class="chapter-num">03 / ME</div><div class="chapter-body"><h2 class="chapter-title">خودم، خارج از صفحه.</h2><p>من محمدم، متولد ۱۳۸۴ و دانشجوی رشته کامپیوتر. به کامپیوتر و تکنولوژی علاقه دارم، اما چیزی که بیشتر از همه برایم هیجان‌انگیز است، ساختن و منتشرکردن است.</p><p>دوست دارم چیزهایی بسازم که وقتی چند دقیقه از روزت را برایشان گذاشتی، احساس نکنی وقتت را هدر داده‌ای.</p></div></section>
-
-      <section class="chapter reveal"><div class="chapter-num">04 / WHY</div><div class="chapter-body"><h2 class="chapter-title">چیزی که برای من مهم‌تر از عددهاست.</h2><div class="quote">می‌خوام ویدیوها و چیزهایی که می‌سازم حال آدم‌ها رو بهتر کنه و در بعضی مرحله‌های زندگی، حتی اگر خیلی کوچک، اثر مثبتی روی ذهنشان بگذارد.</div></div></section>
-
-      <section class="chapter reveal"><div class="chapter-num">05 / YOU</div><div class="chapter-body"><h2 class="chapter-title">اگر تازه با من آشنا شدی…</h2><p>اینکه محتوای من مناسب تو هست یا نه، کاملاً به خودت بستگی دارد. شاید با سلیقه‌ات جور باشد، شاید هم نباشد.</p><p>من فقط سعی می‌کنم دنیایی را که در ذهنم می‌سازم، به شکلی واقعی نشان بدهم. هنوز در مسیر یادگرفتنم و قرار نیست ادعا کنم همه جواب‌ها را دارم.</p></div></section>
+      <section class="hero"><div class="eyebrow">یه معرفی کوتاه</div><h1>سلام، من محمدم.<br><span>EPINOR.</span></h1><p>چند ساله با کامپیوتر و تکنولوژی سر و کله می‌زنم و بالاخره تصمیم گرفتم چیزایی که توی ذهنمه رو بسازم و منتشر کنم.</p></section>
+      <section class="stack">
+        <article class="card"><div class="label">01 / من چه کار می‌کنم؟</div><h2>ویدیو، استریم و هر چیز باحالی که به ذهنم برسه.</h2><p>بعضی وقتا سینمایی، بعضی وقتا کاملاً ساده. مهم اینه که خودِ ایده رو دوست داشته باشم.</p></article>
+        <article class="card"><div class="label">02 / چیزایی که دوست دارم</div><h2>تکنولوژی، بازی، ادیت، ساختن و یادگرفتن.</h2><p>از اینکه یه چیزی رو از صفر بسازم بیشتر از هر چیز دیگه‌ای لذت می‌برم.</p></article>
+        <article class="card"><div class="label">03 / یه اعتراف</div><p class="quote">خیلی وقت منتظر بودم همه‌چی «آماده» بشه.<br>آخرش فهمیدم قرار نیست بشه.</p></article>
+        <article class="card"><div class="label">04 / پیدام کن</div><div class="socials">
+          <a class="social" href="https://t.me/EPINORR" target="_blank" rel="noopener"><span>تلگرام</span><small>@EPINORR</small></a>
+          <a class="social" href="https://instagram.com/epin0r" target="_blank" rel="noopener"><span>اینستاگرام</span><small>@epin0r</small></a>
+          <a class="social" href="https://youtube.com/@epinorr" target="_blank" rel="noopener"><span>یوتیوب</span><small>@epinorr</small></a>
+          <a class="social" href="https://kick.com/epinor" target="_blank" rel="noopener"><span>Kick</span><small>epinor</small></a>
+        </div></article>
+      </section>
     </main>
-
-    <footer class="end reveal"><div><h2>حالا که اینجا رسیدی،<br>بقیه‌اش با تو.</h2><p>برای دنبال‌کردن مسیر، برگرد به صفحه اصلی.</p></div><a class="back" href="index.html">رفتن به صفحه لینک‌ها</a></footer>
+    <footer class="footer">© 2026 EPINOR</footer>
   </div>
-
+  <script src="three.min.js"></script>
   <script>
-    const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const progress=document.getElementById('progress');
-    function update(){const max=document.documentElement.scrollHeight-innerHeight;progress.style.transform='scaleX('+(max>0?scrollY/max:0)+')'}
-    addEventListener('scroll',update,{passive:true});addEventListener('resize',update,{passive:true});update();
-    const els=document.querySelectorAll('.reveal');
-    if(reduced)els.forEach(el=>el.classList.add('on'));else{const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.12});els.forEach(el=>io.observe(el))}
-    addEventListener('pointermove',e=>{document.documentElement.style.setProperty('--mx',(e.clientX/innerWidth*100)+'%');document.documentElement.style.setProperty('--my',(e.clientY/innerHeight*100)+'%')},{passive:true});
+    (()=>{if(typeof THREE==='undefined')return;const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;const c=document.getElementById('scene');let r;try{r=new THREE.WebGLRenderer({canvas:c,antialias:true,alpha:true})}catch(e){return}const mobile=innerWidth<700;r.setPixelRatio(Math.min(devicePixelRatio,mobile?1.1:1.5));r.setSize(innerWidth,innerHeight,false);const s=new THREE.Scene(),cam=new THREE.PerspectiveCamera(42,innerWidth/innerHeight,.1,100);cam.position.z=7;const g=new THREE.Group();g.position.set(-1.8,1.6,0);s.add(g);const geo=new THREE.IcosahedronGeometry(mobile?1.2:1.55,2);g.add(new THREE.LineSegments(new THREE.WireframeGeometry(geo),new THREE.LineBasicMaterial({color:0xbdfc55,transparent:true,opacity:.065})));const pgeo=new THREE.BufferGeometry(),n=mobile?60:110,a=new Float32Array(n*3);for(let i=0;i<n;i++){a[i*3]=(Math.random()-.5)*7;a[i*3+1]=(Math.random()-.5)*6;a[i*3+2]=(Math.random()-.5)*3}pgeo.setAttribute('position',new THREE.BufferAttribute(a,3));s.add(new THREE.Points(pgeo,new THREE.PointsMaterial({color:0xdfead0,size:.024,transparent:true,opacity:.3})));let t=0;function resize(){r.setSize(innerWidth,innerHeight,false);cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix()}addEventListener('resize',resize,{passive:true});function loop(){requestAnimationFrame(loop);t+=.003;if(!reduce)g.rotation.y=t*.6;g.rotation.x=.2+Math.sin(t*.45)*.04;r.render(s,cam)}loop()})();
   </script>
 </body>
 </html>
