@@ -99,6 +99,15 @@ footer{margin-top:34px;text-align:center;color:var(--mute);font-size:.8rem;
   .hero{margin:0;border-radius:28px;aspect-ratio:4/3.4}
   .hero-text{inset-inline:26px}
 }
+
+/* دکمه‌ی «من کیم؟» */
+.me{--c:#35e0ee;background:linear-gradient(100deg,rgba(53,224,238,.14),rgba(255,61,139,.14));border-color:rgba(53,224,238,.35);padding-block:12px}
+.me .av{flex:none;width:52px;height:52px;border-radius:50%;background:url(logo.jpg) 50% 22%/cover;position:relative}
+.me .av::after{content:"";position:absolute;inset:-3px;border-radius:50%;border:2px solid var(--c);animation:pl 2.4s ease-out infinite}
+@keyframes pl{0%{transform:scale(.92);opacity:.9}100%{transform:scale(1.35);opacity:0}}
+@media (prefers-reduced-motion:reduce){.me .av::after{animation:none}}
+.me .title{font-size:1.15rem}
+.me .handle{font-family:'YekanBakh',Tahoma,sans-serif;direction:rtl;text-align:right;font-weight:400}
 </style>
 </head>
 <body>
@@ -114,25 +123,31 @@ footer{margin-top:34px;text-align:center;color:var(--mute);font-size:.8rem;
   </header>
 
   <ul class="links">
-    <li style="--i:0"><a class="link" style="--c:#2AABEE" href="https://t.me/EPINORR" target="_blank" rel="noopener">
+    <li style="--i:0"><a class="link me" href="about.html">
+      <span class="av"></span>
+      <span class="txt"><span class="title">من کیم؟</span><span class="handle">داستان من، قدم به قدم</span></span>
+      <svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+    </a></li>
+
+    <li style="--i:1"><a class="link" style="--c:#2AABEE" href="https://t.me/EPINORR" target="_blank" rel="noopener">
       <span class="ico"><svg viewBox="0 0 24 24"><path d="M21.9 3.6a1.2 1.2 0 0 0-1.2-.2L2.7 10.4c-.9.4-.9 1.6 0 1.9l4.4 1.4 1.7 5.3c.2.7 1 .9 1.5.4l2.4-2.3 4.4 3.3c.6.4 1.4.1 1.6-.6L22.2 4.9c.1-.5-.1-1-.3-1.3zM9.4 13.3l8.1-5.1-6.3 6.6-.3 2.9-1.5-4.4z"/></svg></span>
       <span class="txt"><span class="title">تلگرام</span><span class="handle">@EPINORR</span></span>
       <svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
     </a></li>
 
-    <li style="--i:1"><a class="link" style="--c:#ff4f9a" href="https://instagram.com/epin0r" target="_blank" rel="noopener">
+    <li style="--i:2"><a class="link" style="--c:#ff4f9a" href="https://instagram.com/epin0r" target="_blank" rel="noopener">
       <span class="ico"><svg viewBox="0 0 24 24"><path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm5.3-3.1a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></svg></span>
       <span class="txt"><span class="title">اینستاگرام</span><span class="handle">@epin0r</span></span>
       <svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
     </a></li>
 
-    <li style="--i:2"><a class="link" style="--c:#ff3b3b" href="https://youtube.com/@epinorr" target="_blank" rel="noopener">
+    <li style="--i:3"><a class="link" style="--c:#ff3b3b" href="https://youtube.com/@epinorr" target="_blank" rel="noopener">
       <span class="ico"><svg viewBox="0 0 24 24"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18 5 12 5 12 5s-6 0-7.8.4a2.5 2.5 0 0 0-1.8 1.8C2 8.800 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.800 19 12 19 12 19s6 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.600.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5.200 3-5.200 3z"/></svg></span>
       <span class="txt"><span class="title">یوتیوب</span><span class="handle">@epinorr</span></span>
       <svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
     </a></li>
 
-    <li style="--i:3"><a class="link" style="--c:#53fc18" href="https://kick.com/epinor" target="_blank" rel="noopener">
+    <li style="--i:4"><a class="link" style="--c:#53fc18" href="https://kick.com/epinor" target="_blank" rel="noopener">
       <span class="ico"><svg viewBox="0 0 512 512" style="width:22px;height:22px"><path fill-rule="evenodd" d="M37 .036h164.448v113.621h54.71v-56.82h54.731V.036h164.448v170.777h-54.73v56.82h-54.711v56.8h54.71v56.82h54.73V512.03H310.89v-56.82h-54.73v-56.8h-54.711v113.62H37V.036z"/></svg></span>
       <span class="txt"><span class="title">کیک</span><span class="handle">kick.com/epinor</span></span>
       <svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#07060f">
+<title>من کیم؟ | EPINOR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;800&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'YekanBakh';src:url('yekan.woff') format('woff');font-display:swap}
+:root{--ink:#07060f;--text:#f4f2fb;--mute:#aaa6c4;--acc:#35e0ee;--line:rgba(255,255,255,.12)}
+*{box-sizing:border-box;margin:0}
+html{background:var(--ink);scroll-behavior:smooth}
+body{font-family:'YekanBakh',Tahoma,sans-serif;color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+#gl{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block}
+body.nogl{background:radial-gradient(60% 50% at 30% 20%,#35e0ee33,transparent),radial-gradient(50% 50% at 80% 70%,#ff3d8b33,transparent),var(--ink)}
+body.nogl #gl{display:none}
+.shade{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(120% 90% at 50% 40%,transparent 40%,rgba(7,6,15,.75))}
+
+.top{position:fixed;z-index:5;inset-inline:0;top:0;padding:calc(14px + env(safe-area-inset-top,0px)) 18px 0;display:flex;justify-content:space-between;align-items:center}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--text);text-decoration:none;font-size:.95rem;padding:9px 14px 9px 16px;border-radius:99px;background:rgba(7,6,15,.55);border:1px solid var(--line);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.back svg{width:16px;height:16px}
+.back:hover,.back:focus-visible{border-color:var(--acc)}
+.back:focus-visible,.fl:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+.bar{position:fixed;z-index:6;top:0;inset-inline:0;height:3px;background:var(--acc);transform-origin:100% 50%;transform:scaleX(0);transition:background .6s}
+
+.ch{position:relative;z-index:2;min-height:100vh;display:flex;align-items:center;padding:15vh 20px;max-width:1100px;margin:0 auto}
+.in{max-width:440px;padding:6px 20px;border-inline-start:2px solid var(--acc);background:rgba(7,6,15,.52);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:4px 18px 18px 4px;transition:border-color .6s}
+h2{font-size:clamp(1.8rem,6.4vw,2.7rem);line-height:1.35;margin:14px 0 14px;font-weight:700}
+p{font-size:1.06rem;line-height:2.05;color:#dedaf0}
+p+p{margin-top:12px}
+.in.rv{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1),border-color .6s}
+.in.rv.on{opacity:1;transform:none}
+
+/* هیرو: تنها حرکت هماهنگ ورود */
+.hero{min-height:100svh}
+.hero .in{background:none;border:0;backdrop-filter:none;-webkit-backdrop-filter:none;padding:0;max-width:none}
+.kicker{color:var(--mute);font-size:1.05rem}
+.name{font-family:'Outfit',sans-serif;font-weight:800;direction:ltr;text-align:right;line-height:.95;font-size:clamp(3.6rem,19vw,8.5rem);
+  background:linear-gradient(100deg,#fff 15%,#35e0ee 55%,#ff3d8b);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 8px 40px rgba(53,224,238,.3));margin:8px 0 14px}
+.role{font-size:1.15rem;color:#dedaf0}
+.hint{margin-top:44px;display:flex;align-items:center;gap:12px;color:var(--mute);font-size:.9rem}
+.hint i{display:block;width:1px;height:46px;background:linear-gradient(var(--acc),transparent);transform-origin:top;animation:drip 2.2s ease-in-out infinite}
+@keyframes drip{0%{transform:scaleY(0)}60%{transform:scaleY(1);opacity:1}100%{transform:scaleY(1);opacity:0}}
+@media (prefers-reduced-motion:no-preference){
+  .name{animation:ent 1.8s cubic-bezier(.2,.8,.2,1) both}
+  .kicker,.role,.hint{animation:ent 1.2s .5s both}
+  @keyframes ent{from{opacity:0;letter-spacing:.35em;filter:blur(12px)}to{opacity:1}}
+}
+
+.what{list-style:none;padding:0;margin-top:6px}
+.what li{padding:14px 14px 14px 0;border-inline-start:3px solid var(--k);padding-inline-start:16px;margin-top:14px}
+.what b{display:block;font-size:1.15rem;margin-bottom:2px}
+.what span{color:#dedaf0;line-height:1.9;font-size:1rem}
+.quote{font-size:clamp(1.35rem,4.6vw,1.9rem);line-height:1.9;font-weight:700}
+
+.links{list-style:none;padding:0;margin-top:18px;display:grid;gap:10px}
+.fl{--c:#fff;display:flex;justify-content:space-between;align-items:center;color:var(--text);text-decoration:none;padding:14px 16px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid var(--line);transition:border-color .25s,background .25s,transform .25s}
+.fl::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--c);box-shadow:0 0 12px var(--c);order:2}
+.fl span{flex:1;padding-inline:12px;order:1}
+.fl small{font-family:'Outfit',sans-serif;color:var(--mute);direction:ltr;order:0}
+.fl:hover,.fl:focus-visible{border-color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent);transform:translateY(-2px)}
+.home{display:inline-block;margin-top:20px;color:var(--mute);font-size:.95rem}
+@media (min-width:760px){.ch{padding-inline:48px}.in{padding:10px 28px}}
+</style>
+</head>
+<body>
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="shade"></div>
+<div class="bar" id="bar"></div>
+<nav class="top"><a class="back" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>لینک‌ها</a></nav>
+
+<main>
+<section class="ch hero" data-c="#35e0ee"><div class="in">
+  <p class="kicker">سلام، من محمدم، ملقب به</p>
+  <h1 class="name">EPINOR</h1>
+  <p class="role">تولیدکننده‌ی محتوا و دانشجوی کامپیوتر</p>
+  <div class="hint"><i></i>پایین بیا، ماجرا از اینجا شروع می‌شه</div>
+</div></section>
+
+<section class="ch" data-c="#ff3d8b"><div class="in rv">
+  <h2>سال‌ها فقط فکرش رو می‌کردم</h2>
+  <p>از خیلی وقت پیش دلم می‌خواست تولید محتوا رو شروع کنم. همیشه دوست داشتم فکرهایی که توی سرم هست رو در قالب ویدیو به بقیه نشون بدم و با همین ویدیوها حالشون رو بهتر کنم.</p>
+  <p>ولی سال‌ها کمال‌گرایی، استرس و ترس از قضاوت شدن جلوم بود. با کلی دوره دیدن، بالاخره این مسیر رو شروع کردم.</p>
+</div></section>
+
+<section class="ch" data-c="#ffb347"><div class="in rv">
+  <h2>چی می‌سازم</h2>
+  <ul class="what">
+    <li style="--k:#35e0ee"><b>ویدیو</b><span>همه‌شون ایده‌ها و قالب‌های خودمه. گاهی سینمایی، گاهی از یک دیدگاه متفاوت.</span></li>
+    <li style="--k:#ff3d8b"><b>استریم</b><span>بعضی وقتا گیم می‌زنیم، بعضی وقتا فقط حرف می‌زنیم یا چیل می‌کنیم.</span></li>
+    <li style="--k:#ffb347"><b>فان و آموزشی</b><span>ویدیوهایی که سرگرمت کنن، و گاهی چیزی هم یاد بدن.</span></li>
+  </ul>
+</div></section>
+
+<section class="ch" data-c="#35e0ee"><div class="in rv">
+  <h2>خودم</h2>
+  <p>من محمدم، متولد ۱۳۸۴ و دانشجوی رشته‌ی کامپیوتر. به کامپیوتر و تکنولوژی خیلی علاقه دارم، ولی مهم‌ترین علاقه‌م تولید محتواست.</p>
+</div></section>
+
+<section class="ch" data-c="#ff3d8b"><div class="in rv">
+  <h2>چی برام مهمه</h2>
+  <p class="quote">می‌خوام ویدیوهام حال آدم‌ها رو خوب کنه و توی مراحل مختلف زندگی، روی ذهن و زندگی‌شون اثر مثبت بذاره.</p>
+</div></section>
+
+<section class="ch" data-c="#ffb347"><div class="in rv">
+  <h2>اگه تازه آشنا شدیم</h2>
+  <p>اینکه محتوای من به درد تو می‌خوره یا نه، کاملاً به خودت بستگی داره. شاید خوشت بیاد، شاید نه.</p>
+  <p>من فقط سعی می‌کنم دنیای توی ذهنم رو نشونت بدم. توی این کار با بقیه فرقی ندارم و ادعای زیادی هم ندارم.</p>
+</div></section>
+
+<section class="ch" data-c="#35e0ee" style="min-height:100svh"><div class="in rv">
+  <h2>پیدام کن</h2>
+  <ul class="links">
+    <li><a class="fl" style="--c:#2AABEE" href="https://t.me/EPINORR" target="_blank" rel="noopener"><span>تلگرام</span><small>@EPINORR</small></a></li>
+    <li><a class="fl" style="--c:#ff4f9a" href="https://instagram.com/epin0r" target="_blank" rel="noopener"><span>اینستاگرام</span><small>@epin0r</small></a></li>
+    <li><a class="fl" style="--c:#ff3b3b" href="https://youtube.com/@epinorr" target="_blank" rel="noopener"><span>یوتیوب</span><small>@epinorr</small></a></li>
+    <li><a class="fl" style="--c:#53fc18" href="https://kick.com/epinor" target="_blank" rel="noopener"><span>کیک</span><small>kick.com/epinor</small></a></li>
+  </ul>
+  <a class="home" href="index.html">بازگشت به صفحه‌ی لینک‌ها</a>
+</div></section>
+</main>
+
+<script src="three.min.js"></script>
+<script>
+/* حالت‌های متن: رنگ تاکیدی و ظاهر شدن هر فصل */
+const root=document.documentElement,bar=document.getElementById('bar');
+const chs=[...document.querySelectorAll('.ch')];
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){root.style.setProperty('--acc',e.target.dataset.c);e.target.querySelector('.rv')?.classList.add('on')}}),{threshold:.45});
+chs.forEach(c=>io.observe(c));
+document.querySelector('.hero .in').classList.add('on');
+
+(()=>{
+if(typeof THREE==='undefined'){document.body.classList.add('nogl');return}
+let R;try{R=new THREE.WebGLRenderer({canvas:document.getElementById('gl'),antialias:false,powerPreference:'high-performance'})}catch(e){document.body.classList.add('nogl');return}
+const lite=innerWidth<700||(navigator.hardwareConcurrency||8)<=4;
+const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+R.setPixelRatio(Math.min(devicePixelRatio,lite?1.3:2));
+const S=new THREE.Scene(),BG=0x07060f;S.background=new THREE.Color(BG);S.fog=new THREE.FogExp2(BG,.03);
+const C=new THREE.PerspectiveCamera(64,1,.1,220);S.add(C);
+const LEN=150,rnd=(a,b)=>a+Math.random()*(b-a),pick=a=>a[Math.floor(Math.random()*a.length)];
+const NEON=[0x35e0ee,0xff3d8b,0xffb347,0x8a5cff];
+
+const cvs=(w,h,f)=>{const c=document.createElement('canvas');c.width=w;c.height=h;f(c.getContext('2d'),w,h);return new THREE.CanvasTexture(c)};
+const GT=cvs(64,64,(x)=>{const g=x.createRadialGradient(32,32,0,32,32,32);g.addColorStop(0,'rgba(255,255,255,1)');g.addColorStop(.25,'rgba(255,255,255,.4)');g.addColorStop(1,'rgba(255,255,255,0)');x.fillStyle=g;x.fillRect(0,0,64,64)});
+const WT=()=>{const t=cvs(64,64,(x)=>{x.fillStyle='#0d0b1c';x.fillRect(0,0,64,64);for(let i=0;i<4;i++)for(let j=0;j<4;j++)if(Math.random()<.22){x.fillStyle=pick(['#ffb34788','#35e0ee66','#ff3d8b55','#ffffff44']);x.fillRect(i*16+4,j*16+4,8,9)}});t.wrapS=t.wrapT=THREE.RepeatWrapping;return t};
+const glow=(c,s,z,o=1)=>{const m=new THREE.Sprite(new THREE.SpriteMaterial({map:GT,color:c,blending:THREE.AdditiveBlending,depthWrite:false,transparent:true,opacity:o}));m.scale.set(s,s,1);return m};
+const flat=(c,w,l,o)=>{const m=new THREE.Mesh(new THREE.PlaneGeometry(w,l),new THREE.MeshBasicMaterial({map:GT,color:c,blending:THREE.AdditiveBlending,depthWrite:false,transparent:true,opacity:o}));m.rotation.x=-Math.PI/2;return m};
+
+/* خیابان */
+const road=new THREE.Mesh(new THREE.PlaneGeometry(15,LEN+120),new THREE.MeshBasicMaterial({color:0x0a0916}));
+road.rotation.x=-Math.PI/2;road.position.z=-LEN/2;S.add(road);
+for(let z=20;z>-LEN-40;z-=6){const d=new THREE.Mesh(new THREE.PlaneGeometry(.16,2.6),new THREE.MeshBasicMaterial({color:0x6a6590}));d.rotation.x=-Math.PI/2;d.position.set(0,.01,z);S.add(d)}
+
+/* ساختمان‌ها */
+const wm=[1,2,3].map(()=>{const t=WT();return new THREE.MeshBasicMaterial({map:t})});
+const n=lite?24:40;
+for(const side of[-1,1])for(let i=0;i<n;i++){
+  const w=rnd(5,9),h=rnd(8,30),d=rnd(6,10),m=wm[i%3].clone();m.map=wm[i%3].map.clone();m.map.needsUpdate=true;m.map.repeat.set(w/5,h/5);
+  const b=new THREE.Mesh(new THREE.BoxGeometry(d,h,w),m);
+  b.position.set(side*(7.8+rnd(0,1.5)+d/2),h/2,25-i*((LEN+80)/n)+rnd(-1,1));S.add(b);
+  if(Math.random()<.6){const c=pick(NEON),bar=new THREE.Mesh(new THREE.BoxGeometry(.1,rnd(2,7),.1),new THREE.MeshBasicMaterial({color:c}));
+    bar.position.set(side*7.6,rnd(3,9),b.position.z+rnd(-w/2,w/2));S.add(bar);const g=glow(c,3.2,0,.7);g.position.copy(bar.position);S.add(g)}
+}
+
+/* تابلوی هر فصل: بعد از لود محاسبه می‌شود تا با اسکرول هم‌زمان باشد */
+const signs=[];
+function place(){
+  signs.forEach(s=>S.remove(s));signs.length=0;
+  const max=document.documentElement.scrollHeight-innerHeight;
+  chs.forEach((el,i)=>{
+    const r=el.getBoundingClientRect(),mid=(r.top+scrollY+r.height/2-innerHeight/2)/max,p=Math.min(Math.max(mid,0),1);
+    const col=new THREE.Color(el.dataset.c),side=i%2?1:-1,z=camZ(p)-16,g=new THREE.Group();
+    const o=new THREE.Mesh(new THREE.PlaneGeometry(i?3.6:5,i?5.4:2.6),new THREE.MeshBasicMaterial({color:col}));
+    const inn=new THREE.Mesh(new THREE.PlaneGeometry(i?3.2:4.6,i?5:2.2),new THREE.MeshBasicMaterial({color:0x07060f}));inn.position.z=.02;
+    const bar=new THREE.Mesh(new THREE.PlaneGeometry(i?1.6:3,.16),new THREE.MeshBasicMaterial({color:col}));bar.position.z=.04;
+    const gl=glow(col,i?15:18,0,.8);gl.position.z=-.3;g.add(o,inn,bar,gl);
+    g.position.set(side*7.3,i?5.5:6,z);g.rotation.y=-side*Math.PI/2;S.add(g);signs.push(g);
+    const rf=flat(col,3,16,.55);rf.position.set(side*4.2,.03,z);S.add(rf);signs.push(rf);
+  });
+}
+const camZ=p=>10-p*LEN;
+
+/* ماشین‌ها: رد نور چراغ‌ها */
+const cars=[],cn=lite?16:30;
+for(let i=0;i<cn;i++){
+  const out=Math.random()<.5,x=(out?-1:1)*rnd(1.2,5.6),c=out?0xfff1d0:0xff2a3a,g=new THREE.Group();
+  for(const dx of[-.55,.55]){const s=glow(c,1.1,0,1);s.position.x=dx;s.position.y=.55;g.add(s);const t=flat(c,.45,7,.55);t.position.set(dx,.04,out?-3.5:3.5);g.add(t)}
+  g.position.set(x,0,-rnd(0,LEN));g.userData.v=out?rnd(16,26):-rnd(-4,8);S.add(g);cars.push(g);
+}
+
+/* ذرات معلق */
+const pc=lite?160:320,pg=new THREE.BufferGeometry(),pa=new Float32Array(pc*3);
+for(let i=0;i<pc;i++){pa[i*3]=rnd(-14,14);pa[i*3+1]=rnd(.2,14);pa[i*3+2]=-rnd(2,50)}
+pg.setAttribute('position',new THREE.BufferAttribute(pa,3));
+const pts=new THREE.Points(pg,new THREE.PointsMaterial({map:GT,size:.38,color:0x9fe9ff,transparent:true,opacity:.5,blending:THREE.AdditiveBlending,depthWrite:false}));
+C.add(pts);
+
+/* اسکرول و ماوس */
+let P=0,T=0,mx=0,my=0,time=0,last=performance.now();
+const rd=()=>{const m=document.documentElement.scrollHeight-innerHeight;T=m>0?Math.min(Math.max(scrollY/m,0),1):0;bar.style.transform=`scaleX(${T})`};
+addEventListener('scroll',rd,{passive:true});rd();
+addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5},{passive:true});
+function size(){R.setSize(innerWidth,innerHeight,false);C.aspect=innerWidth/innerHeight;C.fov=innerWidth<700?72:64;C.updateProjectionMatrix()}
+addEventListener('resize',()=>{size();place()});size();
+addEventListener('load',()=>{place();document.fonts&&document.fonts.ready.then(place)});
+place();
+
+function frame(now){
+  requestAnimationFrame(frame);
+  if(document.hidden)return;
+  const dt=Math.min((now-last)/1000,.05);last=now;time+=dt;
+  P+=(T-P)*(still?1:.07);
+  const z=camZ(P),sway=still?0:Math.sin(time*.5);
+  C.position.set(mx*1.6+sway*.25,2.1+Math.sin(time*.7)*(still?0:.06)-my*.4,z);
+  C.lookAt(mx*3,2.3-my,z-22);
+  if(!still)cars.forEach(c=>{c.position.z+=c.userData.v*dt;const d=c.position.z-z;if(d>12)c.position.z-=160;else if(d<-148)c.position.z+=160});
+  const a=pts.geometry.attributes.position.array;
+  if(!still){for(let i=0;i<pc;i++){a[i*3+1]-=dt*.35;if(a[i*3+1]<.2)a[i*3+1]=14}pts.geometry.attributes.position.needsUpdate=true}
+  R.render(S,C);
+}
+requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
