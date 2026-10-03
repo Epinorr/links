@@ -1,435 +1,157 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لینک‌های شبکه‌های اجتماعی</title>
-    
-    <!-- فونت انگلیسی مدرن برای نام پروفایل -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800&display=swap" rel="stylesheet">
-    
-    <!-- آیکون‌های FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#07060f">
+<title>EPINOR | لینک‌ها</title>
+<meta name="description" content="همه‌ی شبکه‌های اجتماعی EPINOR در یک صفحه">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;800&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'YekanBakh';src:url('yekan.woff') format('woff');font-display:swap}
+:root{
+  --ink:#07060f; --night:#0e0c1f; --line:rgba(255,255,255,.09);
+  --text:#f4f2fb; --mute:#9d99b8; --teal:#35e0ee; --pink:#ff3d8b;
+}
+*{box-sizing:border-box;margin:0}
+html{background:var(--ink)}
+body{
+  font-family:'YekanBakh',Tahoma,sans-serif; color:var(--text); background:var(--ink);
+  min-height:100vh; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  padding-bottom:env(safe-area-inset-bottom,0);
+}
+/* پس‌زمینه: همان عکس، بزرگ و محو، تا نور نئون صفحه را پر کند */
+.ambient{position:fixed;inset:0;z-index:-1;overflow:hidden}
+.ambient::before{
+  content:"";position:absolute;inset:-10%;background:url(logo.jpg) center/cover;
+  filter:blur(70px) saturate(1.6);opacity:.38;transform:scale(1.2);
+}
+.ambient::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(7,6,15,.35),var(--ink) 75%)}
 
-    <!-- Three.js Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+.wrap{max-width:460px;margin:0 auto;padding:0 20px 56px}
 
-    <style>
-        @font-face {
-            font-family: 'YekanBakh';
-            src: url('Yekan Bakh FaNum 05 Medium.woff') format('woff');
-        }
+/* هیرو */
+.hero{position:relative;margin:0 -20px;aspect-ratio:4/4.6;max-height:520px;overflow:hidden}
+.hero img{width:100%;height:100%;object-fit:cover;object-position:50% 22%;display:block;
+  -webkit-mask-image:linear-gradient(#000 55%,transparent);mask-image:linear-gradient(#000 55%,transparent)}
+.hero-text{position:absolute;inset-inline:20px;bottom:6px}
+.name{
+  font-family:'Outfit',sans-serif;font-weight:800;direction:ltr;text-align:right;
+  font-size:clamp(3.4rem,17vw,5rem);line-height:.95;letter-spacing:-.02em;
+  background:linear-gradient(100deg,#fff 20%,var(--teal) 60%,var(--pink));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 6px 30px rgba(53,224,238,.25));
+}
+.sub{margin-top:10px;color:var(--mute);font-size:.95rem}
 
-        body {
-            font-family: 'YekanBakh', Tahoma, sans-serif;
-            background-color: #050508; 
-            margin: 0;
-            overflow-x: hidden;
-            color: #ffffff;
-            -webkit-font-smoothing: antialiased;
-        }
+/* لیست لینک‌ها */
+.links{list-style:none;padding:0;margin-top:26px;display:flex;flex-direction:column;gap:10px}
+.link{
+  --c:#fff; position:relative;display:flex;align-items:center;gap:14px;
+  padding:14px 14px 14px 18px;border-radius:18px;text-decoration:none;color:var(--text);
+  background:rgba(255,255,255,.045);border:1px solid var(--line);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  overflow:hidden;isolation:isolate;transition:transform .25s ease,border-color .25s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+/* نور دنبال‌کننده‌ی موس/لمس */
+.link::before{
+  content:"";position:absolute;inset:0;z-index:-1;opacity:0;transition:opacity .3s;
+  background:radial-gradient(260px circle at var(--x,50%) var(--y,50%),color-mix(in srgb,var(--c) 28%,transparent),transparent 70%);
+}
+.link:hover::before,.link:focus-visible::before,.link:active::before{opacity:1}
+.link:hover,.link:focus-visible{border-color:color-mix(in srgb,var(--c) 55%,transparent);transform:translateY(-2px)}
+.link:active{transform:scale(.985)}
+.link:focus-visible{outline:2px solid var(--c);outline-offset:3px}
 
-        /* کلاس اختصاصی فونت انگلیسی برای نام */
-        .creator-name {
-            font-family: 'Outfit', sans-serif;
-            letter-spacing: 0.05em; /* کمی فاصله‌گذاری برای لوکس‌تر شدن */
-        }
+.ico{
+  flex:none;width:48px;height:48px;border-radius:14px;display:grid;place-items:center;
+  background:color-mix(in srgb,var(--c) 14%,rgba(255,255,255,.04));
+  color:var(--c);border:1px solid color-mix(in srgb,var(--c) 30%,transparent);
+  transition:background .3s,color .3s,box-shadow .3s;
+}
+.ico svg{width:24px;height:24px;fill:currentColor}
+.link:hover .ico,.link:focus-visible .ico{background:var(--c);color:#07060f;box-shadow:0 8px 24px -6px var(--c)}
 
-        #bg-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            pointer-events: none;
-        }
+.txt{flex:1;min-width:0}
+.title{display:block;font-size:1.1rem;line-height:1.3}
+.handle{display:block;direction:ltr;text-align:right;color:var(--mute);font-size:.85rem;margin-top:2px;
+  font-family:'Outfit',sans-serif;font-weight:600;letter-spacing:.01em}
+.go{flex:none;width:20px;height:20px;color:var(--mute);transition:transform .3s,color .3s}
+.link:hover .go,.link:focus-visible .go{color:var(--text);transform:translateX(-4px)}
 
-        .glass-panel {
-            background: rgba(20, 20, 25, 0.55);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        }
+footer{margin-top:34px;text-align:center;color:var(--mute);font-size:.8rem;
+  font-family:'Outfit',sans-serif;letter-spacing:.12em;direction:ltr}
 
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-        }
-
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .social-btn {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            transform-style: preserve-3d;
-            text-decoration: none;
-            -webkit-tap-highlight-color: transparent; 
-        }
-
-        .social-btn::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: var(--brand-color);
-            opacity: 0;
-            z-index: -1;
-            transition: opacity 0.4s ease;
-            border-radius: inherit;
-        }
-
-        .social-btn:hover::before, .social-btn.force-hover::before {
-            opacity: 0.15; 
-        }
-
-        .social-btn:hover, .social-btn.force-hover {
-            box-shadow: 0 15px 30px -5px var(--brand-color-shadow), 0 0 15px rgba(0,0,0,0.5);
-            border-color: rgba(255, 255, 255, 0.15);
-            transform: scale(1.02);
-        }
-
-        .social-btn:hover .icon-container, .social-btn.force-hover .icon-container {
-            transform: scale(1.15) rotate(-5deg);
-            background: var(--brand-color);
-            border-color: var(--brand-color);
-            box-shadow: 0 0 20px var(--brand-color-shadow);
-        }
-
-        .social-btn:hover .icon-container i, 
-        .social-btn.force-hover .icon-container i {
-            color: #fff;
-        }
-
-        /* استایل اختصاصی هاور برای SVG (مثل دکمه Kick) */
-        .social-btn:hover .icon-container svg,
-        .social-btn.force-hover .icon-container svg {
-            color: #fff;
-        }
-
-        .icon-container {
-            transition: all 0.4s ease;
-        }
-
-        .social-btn[data-status="off"] {
-            display: none !important;
-        }
-
-        .profile-glow {
-            position: relative;
-        }
-        
-        .profile-glow::after {
-            content: '';
-            position: absolute;
-            inset: -4px;
-            border-radius: 50%;
-            background: conic-gradient(from 0deg, #53fc18, #00f2fe, #ff0000, #2AABEE, #E1306C, #53fc18);
-            z-index: -1;
-            filter: blur(15px);
-            opacity: 0.7;
-            animation: spinGlow 6s linear infinite;
-        }
-
-        @keyframes spinGlow {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.3); }
-    </style>
+/* ورود: یک حرکت هماهنگ برای کل صفحه */
+@media (prefers-reduced-motion:no-preference){
+  .hero img{animation:rise 1.1s cubic-bezier(.2,.8,.2,1) both}
+  .name{animation:rise 1s .15s cubic-bezier(.2,.8,.2,1) both}
+  .sub{animation:rise 1s .25s cubic-bezier(.2,.8,.2,1) both}
+  .links li{animation:rise .8s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(.35s + var(--i)*.08s)}
+  @keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+}
+@media (min-width:700px){
+  .wrap{padding-top:40px}
+  .hero{margin:0;border-radius:28px;aspect-ratio:4/3.4}
+  .hero-text{inset-inline:26px}
+}
+</style>
 </head>
-<body class="min-h-screen relative flex items-center justify-center p-4 sm:p-6 lg:p-8">
+<body>
+<div class="ambient" aria-hidden="true"></div>
 
-    <canvas id="bg-canvas"></canvas>
+<main class="wrap">
+  <header class="hero">
+    <img src="logo.jpg" alt="تصویر EPINOR" fetchpriority="high">
+    <div class="hero-text">
+      <h1 class="name">EPINOR</h1>
+      <p class="sub">از اینجا دنبالم کن</p>
+    </div>
+  </header>
 
-    <main class="w-full max-w-md glass-panel rounded-[2rem] p-8 relative z-10 fade-in-up" style="animation-delay: 0.1s;">
-        
-        <header class="flex flex-col items-center text-center mb-10">
-            <div class="profile-glow mb-6 fade-in-up" style="animation-delay: 0.2s;">
-                <img src="logo.jpg" onerror="this.src='https://placehold.co/400x400/1e293b/ffffff?text=Logo'" alt="لوگوی شما" class="w-28 h-28 rounded-full border-2 border-white/10 object-cover shadow-2xl relative z-10 bg-[#0f172a]">
-            </div>
-            
-            <!-- نام شما با فونت انگلیسی و کلاس جدید -->
-            <h1 class="creator-name text-3xl font-extrabold text-white fade-in-up" style="animation-delay: 0.3s;" dir="ltr">
-                EPINOR
-            </h1>
-        </header>
+  <ul class="links">
+    <li style="--i:0"><a class="link" style="--c:#2AABEE" href="https://t.me/EPINORR" target="_blank" rel="noopener">
+      <span class="ico"><svg viewBox="0 0 24 24"><path d="M21.9 3.6a1.2 1.2 0 0 0-1.2-.2L2.7 10.4c-.9.4-.9 1.6 0 1.9l4.4 1.4 1.7 5.3c.2.7 1 .9 1.5.4l2.4-2.3 4.4 3.3c.6.4 1.4.1 1.6-.6L22.2 4.9c.1-.5-.1-1-.3-1.3zM9.4 13.3l8.1-5.1-6.3 6.6-.3 2.9-1.5-4.4z"/></svg></span>
+      <span class="txt"><span class="title">تلگرام</span><span class="handle">@EPINORR</span></span>
+      <svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+    </a></li>
 
-        <nav class="flex flex-col gap-4 w-full">
-            
-            <a href="https://t.me/EPINORR" target="_blank" data-status="on" class="social-btn fade-in-up flex items-center p-3 rounded-2xl bg-white/5 border border-white/5" style="--brand-color: #2AABEE; --brand-color-shadow: rgba(42, 171, 238, 0.4); animation-delay: 0.4s;">
-                <div class="icon-container w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-2xl ml-4">
-                    <i class="fa-brands fa-telegram text-slate-200"></i>
-                </div>
-                <div class="flex-1 text-right">
-                    <span class="font-semibold text-lg text-white">تلگرام</span>
-                </div>
-            </a>
+    <li style="--i:1"><a class="link" style="--c:#ff4f9a" href="https://instagram.com/epin0r" target="_blank" rel="noopener">
+      <span class="ico"><svg viewBox="0 0 24 24"><path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm5.3-3.1a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></svg></span>
+      <span class="txt"><span class="title">اینستاگرام</span><span class="handle">@epin0r</span></span>
+      <svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+    </a></li>
 
-            <a href="https://instagram.com/epin0r" target="_blank" data-status="on" class="social-btn fade-in-up flex items-center p-3 rounded-2xl bg-white/5 border border-white/5" style="--brand-color: #E1306C; --brand-color-shadow: rgba(225, 48, 108, 0.4); animation-delay: 0.5s;">
-                <div class="icon-container w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-2xl ml-4">
-                    <i class="fa-brands fa-instagram text-slate-200"></i>
-                </div>
-                <div class="flex-1 text-right">
-                    <span class="font-semibold text-lg text-white">اینستاگرام</span>
-                </div>
-            </a>
+    <li style="--i:2"><a class="link" style="--c:#ff3b3b" href="https://youtube.com/@epinorr" target="_blank" rel="noopener">
+      <span class="ico"><svg viewBox="0 0 24 24"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18 5 12 5 12 5s-6 0-7.8.4a2.5 2.5 0 0 0-1.8 1.8C2 8.800 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.800 19 12 19 12 19s6 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.600.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5.200 3-5.200 3z"/></svg></span>
+      <span class="txt"><span class="title">یوتیوب</span><span class="handle">@epinorr</span></span>
+      <svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+    </a></li>
 
-            <a href="https://youtube.com/@epinorr" target="_blank" data-status="on" class="social-btn fade-in-up flex items-center p-3 rounded-2xl bg-white/5 border border-white/5" style="--brand-color: #FF0000; --brand-color-shadow: rgba(255, 0, 0, 0.4); animation-delay: 0.6s;">
-                <div class="icon-container w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-2xl ml-4">
-                    <i class="fa-brands fa-youtube text-slate-200"></i>
-                </div>
-                <div class="flex-1 text-right">
-                    <span class="font-semibold text-lg text-white">یوتیوب</span>
-                </div>
-            </a>
+    <li style="--i:3"><a class="link" style="--c:#53fc18" href="https://kick.com/epinor" target="_blank" rel="noopener">
+      <span class="ico"><svg viewBox="0 0 512 512" style="width:22px;height:22px"><path fill-rule="evenodd" d="M37 .036h164.448v113.621h54.71v-56.82h54.731V.036h164.448v170.777h-54.73v56.82h-54.711v56.8h54.71v56.82h54.73V512.03H310.89v-56.82h-54.73v-56.8h-54.711v113.62H37V.036z"/></svg></span>
+      <span class="txt"><span class="title">کیک</span><span class="handle">kick.com/epinor</span></span>
+      <svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+    </a></li>
+    <!-- برای فعال‌کردن تیک‌تاک، یک <li> مثل بالا اضافه کن با --c:#35e0ee و آدرس خودت -->
+  </ul>
 
-            <a href="https://kick.com/epinor" target="_blank" data-status="on" class="social-btn fade-in-up flex items-center p-3 rounded-2xl bg-white/5 border border-white/5" style="--brand-color: #53fc18; --brand-color-shadow: rgba(83, 252, 24, 0.4); animation-delay: 0.7s;">
-                <div class="icon-container w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center ml-4 text-slate-200">
-                    <svg class="w-6 h-6" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2">
-                        <path d="M37 .036h164.448v113.621h54.71v-56.82h54.731V.036h164.448v170.777h-54.73v56.82h-54.711v56.8h54.71v56.82h54.73V512.03H310.89v-56.82h-54.73v-56.8h-54.711v113.62H37V.036z" fill="currentColor" style="transition: fill 0.4s ease;"/>
-                    </svg>
-                </div>
-                <div class="flex-1 text-right">
-                    <span class="font-semibold text-lg text-white">کیک</span>
-                </div>
-            </a>
+  <footer>EPINOR</footer>
+</main>
 
-            <a href="#" target="_blank" data-status="off" class="social-btn fade-in-up flex items-center p-3 rounded-2xl bg-white/5 border border-white/5" style="--brand-color: #00f2fe; --brand-color-shadow: rgba(0, 242, 254, 0.4); animation-delay: 0.8s;">
-                <div class="icon-container w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-2xl ml-4">
-                    <i class="fa-brands fa-tiktok text-slate-200"></i>
-                </div>
-                <div class="flex-1 text-right">
-                    <span class="font-semibold text-lg text-white">تیک‌تاک</span>
-                </div>
-            </a>
-
-        </nav>
-    </main>
-
-    <script>
-        window.onload = function() {
-            // منتظر می‌مانیم تا فونت‌ها (مخصوصا فونت‌آوسام) کامل لود شوند تا آیکون‌ها روی بوم درست رسم شوند
-            document.fonts.ready.then(() => {
-                initThreeJS();
-            });
-            initButtons();
-        };
-
-        function initThreeJS() {
-            const canvas = document.getElementById('bg-canvas');
-            const scene = new THREE.Scene();
-            // مه‌ای تیره برای محو شدن المان‌های دورتر و ایجاد عمق
-            scene.fog = new THREE.FogExp2(0x050508, 0.035);
-
-            const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
-            camera.position.set(0, 0, 15);
-
-            const renderer = new THREE.WebGLRenderer({ 
-                canvas: canvas, 
-                alpha: true,
-                antialias: true 
-            });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-            // لیست تمام المان‌هایی که قرار است در پس‌زمینه معلق باشند
-            const elements = [
-                { type: 'fa', code: '\uf2c6', color: '#2AABEE' }, // Telegram
-                { type: 'fa', code: '\uf16d', color: '#E1306C' }, // Instagram
-                { type: 'fa', code: '\uf167', color: '#FF0000' }, // YouTube
-                { type: 'fa', code: '\ue07b', color: '#00f2fe' }, // TikTok
-                { type: 'svg', path: 'M37 .036h164.448v113.621h54.71v-56.82h54.731V.036h164.448v170.777h-54.73v56.82h-54.711v56.8h54.71v56.82h54.73V512.03H310.89v-56.82h-54.73v-56.8h-54.711v113.62H37V.036z', color: '#53fc18' }, // Kick
-                { type: 'text', text: 'EPINOR', font: 'Outfit', color: '#ffffff' }, 
-                { type: 'text', text: 'EPINOR', font: 'YekanBakh', color: '#00f2fe' }, 
-                { type: 'text', text: 'EPINOR', font: 'Courier New', color: '#E1306C' }, 
-                { type: 'text', text: 'EPINOR', font: 'Georgia', color: '#53fc18' } 
-            ];
-
-            // تبدیل المان‌ها به تکسچرهای درخشان با استفاده از Canvas 2D
-            const textures = elements.map(item => {
-                const tempCanvas = document.createElement('canvas');
-                tempCanvas.width = 256;
-                tempCanvas.height = 256;
-                const ctx = tempCanvas.getContext('2d');
-                
-                ctx.shadowColor = item.color;
-                ctx.shadowBlur = 25;
-                ctx.fillStyle = item.color;
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-
-                if (item.type === 'fa') {
-                    ctx.font = '900 110px "Font Awesome 6 Brands"';
-                    ctx.fillText(item.code, 128, 128);
-                    ctx.fillText(item.code, 128, 128);
-                } else if (item.type === 'text') {
-                    ctx.font = `bold 45px ${item.font}`;
-                    ctx.fillText(item.text, 128, 128);
-                    ctx.fillText(item.text, 128, 128);
-                } else if (item.type === 'svg') {
-                    ctx.save();
-                    ctx.translate(85, 64);
-                    ctx.scale(0.25, 0.25);
-                    const p = new Path2D(item.path);
-                    ctx.fill(p);
-                    ctx.fill(p);
-                    ctx.restore();
-                }
-                
-                const tex = new THREE.CanvasTexture(tempCanvas);
-                tex.needsUpdate = true;
-                return tex;
-            });
-
-            const particles = [];
-            const particleCount = 40; 
-
-            for (let i = 0; i < particleCount; i++) {
-                const tex = textures[Math.floor(Math.random() * textures.length)];
-                
-                // استفاده از Sprite به جای Plane برای جلوگیری از مشکل تخت دیده شدن
-                const material = new THREE.SpriteMaterial({
-                    map: tex,
-                    transparent: true,
-                    blending: THREE.AdditiveBlending, 
-                    depthWrite: false,
-                    opacity: Math.random() * 0.4 + 0.2 
-                });
-
-                const sprite = new THREE.Sprite(material);
-
-                // سایز تصادفی
-                const size = Math.random() * 2 + 1.5;
-                sprite.scale.set(size, size, 1);
-
-                // موقعیت اولیه تصادفی
-                const startX = (Math.random() - 0.5) * 40;
-                const startY = (Math.random() - 0.5) * 30;
-                const startZ = (Math.random() - 0.5) * 20 - 5;
-                
-                sprite.position.set(startX, startY, startZ);
-
-                // تنظیمات حرکت شناور
-                sprite.userData = {
-                    startX: startX,
-                    startY: startY,
-                    speedX: (Math.random() - 0.5) * 0.3, // سرعت شناور شدن در عرض
-                    speedY: (Math.random() - 0.5) * 0.3, // سرعت شناور شدن در ارتفاع
-                    timeOffset: Math.random() * Math.PI * 2,
-                    swaySpeed: (Math.random() - 0.5) * 0.5 // سرعت تاب خوردن ملایم
-                };
-
-                scene.add(sprite);
-                particles.push(sprite);
-            }
-
-            let mouseX = 0;
-            let mouseY = 0;
-            const windowHalfX = window.innerWidth / 2;
-            const windowHalfY = window.innerHeight / 2;
-
-            document.addEventListener('mousemove', (event) => {
-                mouseX = (event.clientX - windowHalfX) / windowHalfX;
-                mouseY = (event.clientY - windowHalfY) / windowHalfY;
-            });
-
-            const clock = new THREE.Clock();
-
-            function animate() {
-                requestAnimationFrame(animate);
-                const time = clock.getElapsedTime();
-
-                // حرکت دادن تک تک آبجکت‌ها (شناور شدن نرم)
-                particles.forEach(p => {
-                    // حرکت سینوسی باعث میشه مثل حباب تو فضا معلق باشن و گم نشن
-                    p.position.x = p.userData.startX + Math.sin(time * p.userData.speedX + p.userData.timeOffset) * 4;
-                    p.position.y = p.userData.startY + Math.cos(time * p.userData.speedY + p.userData.timeOffset) * 4;
-                    
-                    // یک تاب خوردن (چرخش دوبعدی) بسیار ملایم
-                    p.material.rotation = Math.sin(time * p.userData.swaySpeed) * 0.15;
-                });
-
-                // حرکت ملایم دوربین با موس (Parallax Effect)
-                camera.position.x += (mouseX * 3 - camera.position.x) * 0.03;
-                camera.position.y += (-mouseY * 3 - camera.position.y) * 0.03;
-                camera.lookAt(scene.position);
-
-                renderer.render(scene, camera);
-            }
-            
-            animate();
-
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
-        }
-
-        function initButtons() {
-            const buttons = document.querySelectorAll('.social-btn');
-
-            buttons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    if(button.getAttribute('data-status') === 'off') return;
-                    
-                    const href = this.getAttribute('href');
-                    const target = this.getAttribute('target') || '_self';
-                    
-                    if (href && href !== '#') {
-                        e.preventDefault(); // جلوگیری از انتقال سریع
-                        
-                        this.style.transform = ''; 
-                        this.classList.add('force-hover'); // اعمال افکت هاور با کد
-                        
-                        // انتقال با تاخیر 0.4 ثانیه برای دیده شدن افکت در موبایل
-                        setTimeout(() => {
-                            this.classList.remove('force-hover');
-                            if (target === '_blank') {
-                                window.open(href, '_blank');
-                            } else {
-                                window.location.href = href;
-                            }
-                        }, 400); 
-                    }
-                });
-
-                button.addEventListener('mousemove', (e) => {
-                    if(button.getAttribute('data-status') === 'off') return;
-                    if (window.innerWidth <= 768) return; // غیرفعال کردن Tilt در موبایل
-
-                    const rect = button.getBoundingClientRect();
-                    const x = e.clientX - rect.left; 
-                    const y = e.clientY - rect.top;  
-                    
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    
-                    const rotateX = ((y - centerY) / centerY) * -8; 
-                    const rotateY = ((x - centerX) / centerX) * 8;
-                    
-                    button.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-                });
-
-                button.addEventListener('mouseleave', () => {
-                    button.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-                });
-            });
-        }
-    </script>
+<script>
+/* نور دنبال‌کننده روی هر لینک (موس و لمس) */
+document.querySelectorAll('.link').forEach(el=>{
+  const move=e=>{const r=el.getBoundingClientRect();
+    el.style.setProperty('--x',(e.clientX-r.left)+'px');
+    el.style.setProperty('--y',(e.clientY-r.top)+'px')};
+  el.addEventListener('pointermove',move);
+  el.addEventListener('pointerdown',move);
+});
+</script>
 </body>
 </html>
